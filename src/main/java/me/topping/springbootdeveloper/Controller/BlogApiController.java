@@ -3,6 +3,7 @@ package me.topping.springbootdeveloper.Controller;
 import lombok.RequiredArgsConstructor;
 import me.topping.springbootdeveloper.DTO.AddArticleRequest;
 import me.topping.springbootdeveloper.DTO.ArticleResponse;
+import me.topping.springbootdeveloper.DTO.UpdateArticleRequest;
 import me.topping.springbootdeveloper.Service.BlogService;
 import me.topping.springbootdeveloper.domain.Article;
 import org.springframework.http.HttpStatus;
@@ -55,5 +56,13 @@ public class BlogApiController {
         blogService.delete(id);
 
         return ResponseEntity.ok().build();
+    }
+
+    // Update
+    @PutMapping("/api/articles/{id}") // URL에서 PUT요청이 들어오면
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody UpdateArticleRequest request) { // Request Body 정보가 reqeust로 넘어옴
+        Article updatedArticle = blogService.update(id, request); // Service 클래스의 update() 메서드에 id와 request를 넘겨
+
+        return ResponseEntity.ok().body(updatedArticle); // 응답 값을 body에 담아 전송
     }
 }

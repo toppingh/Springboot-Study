@@ -28,6 +28,11 @@ public class Article {
         this.content = content;
     }
 
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     // 빌더 패턴 사용 x시
 //    new Article("abc", "def"); 어느 필드에 들어가는 값인지 파악하기 어려움!
 
