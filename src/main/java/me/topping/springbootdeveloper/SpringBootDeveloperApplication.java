@@ -3,7 +3,9 @@ package me.topping.springbootdeveloper;
 // main() 메서드와 같은 역할을 하는 클래스 => 여기서 스프링 부트 시작
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+@EnableJpaAuditing // Entity의 created_at, updated_at을 자동으로 업데이트
 @SpringBootApplication // 어노테이션 추가 시 스프링 부트 사용에 필요한 기본 설정을 해준다.
 public class SpringBootDeveloperApplication {
     public static void main(String[] args) {

@@ -5,7 +5,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
+
+@EntityListeners(AuditingEntityListener.class) // Entity 생성 및 수정 시간 자동 감시, 기록
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -32,6 +38,15 @@ public class Article {
         this.title = title;
         this.content = content;
     }
+
+    // Entity에 생성, 수정 시간 추가
+    @CreatedDate // Entity가 생성될 때 생성 시간을
+    @Column(name = "created_at") // created_at 컬럼에 저장
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate // Entity가 수정될 때 수정 시간을
+    @Column(name = "updated_at") // updated_at 컬럼에 저장
+    private LocalDateTime updatedAt;
 
     // 빌더 패턴 사용 x시
 //    new Article("abc", "def"); 어느 필드에 들어가는 값인지 파악하기 어려움!
